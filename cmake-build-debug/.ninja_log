@@ -1,0 +1,18 @@
+# ninja log v5
+39	3136	6712187522110288	CMakeFiles/Pathfinder.dir/source/Algorithm.cpp.obj	823c6ade4fd672d
+3457	4892	6712187540255247	CMakeFiles/Pathfinder.dir/source/RecMaze.cpp.obj	ba84c6cd101f42bb
+45	3351	6712187524746153	CMakeFiles/Pathfinder.dir/source/BFS.cpp.obj	7f8039d512e1b02a
+50	3379	6712187524857102	CMakeFiles/Pathfinder.dir/source/App.cpp.obj	270b7a349808d78c
+55	3457	6712187525731489	CMakeFiles/Pathfinder.dir/source/DFS.cpp.obj	eaeb0b47fe826d56
+60	3662	6712187527312337	CMakeFiles/Pathfinder.dir/source/ASTAR.cpp.obj	8d8bb5a73fb8275c
+3140	4691	6712187538106445	CMakeFiles/Pathfinder.dir/source/Node.cpp.obj	5007dbe9f0823c25
+1	3709	6712187527828500	CMakeFiles/Pathfinder.dir/source/main.cpp.obj	76b9dd5ffb2de06b
+3379	5148	6712187542921936	CMakeFiles/Pathfinder.dir/source/Graph.cpp.obj	93ef3ed3720afb0d
+3351	5170	6712187543162959	CMakeFiles/Pathfinder.dir/source/Dijkstra.cpp.obj	c2ce2e6c882c794a
+3662	5246	6712187543968341	CMakeFiles/Pathfinder.dir/source/Search.cpp.obj	1874255d70daea47
+54	4473	6712188053034589	CMakeFiles/Pathfinder.dir/imgui/imgui_tables.cpp.obj	438f89b1d8b52cab
+50	4898	6712188057224584	CMakeFiles/Pathfinder.dir/imgui/imgui_draw.cpp.obj	7e3108d35826c18
+59	5357	6712188062079736	CMakeFiles/Pathfinder.dir/imgui/imgui_widgets.cpp.obj	73a26a635cbffb2b
+46	5735	6712188065895831	CMakeFiles/Pathfinder.dir/imgui/imgui-SFML.cpp.obj	76adc428aaba71ec
+5	6228	6712188070773733	CMakeFiles/Pathfinder.dir/imgui/imgui.cpp.obj	3fd9ca51153cbce5
+6228	7932	6712188087751339	Pathfinder.exe	1e6efa162d796029

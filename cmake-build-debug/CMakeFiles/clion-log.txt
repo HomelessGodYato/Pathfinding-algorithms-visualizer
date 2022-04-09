@@ -1,0 +1,5 @@
+"D:\CLion 2021.3.2\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=D:/CLion 2021.3.2/bin/ninja/win/ninja.exe" -G Ninja D:\desktop\c++\Pathfinder
+-- Found SFML 2.5.1 in D:/desktop/c++/Pathfinder/SFML-2.5.1/lib/cmake/SFML
+-- Configuring done
+-- Generating done
+-- Build files have been written to: D:/desktop/c++/Pathfinder/cmake-build-debug
