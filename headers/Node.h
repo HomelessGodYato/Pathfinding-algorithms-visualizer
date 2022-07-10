@@ -18,12 +18,10 @@
 
 #define BLANK_COLOR sf::Color::White
 
-/**
- * Klasa podstawowa na której obiektach działa większość innych klas
- */
+
 
 struct Node {
-    ///wektor sąsiednich węzłów grafu
+    
     std::vector<Node*> neighbors;
     sf::RectangleShape tile_shape;
     sf::Color          color;
@@ -32,57 +30,30 @@ struct Node {
     unsigned int total_rows;
     float    x, y;
     float    width;
-
-    /// stan odwiedzenia labiryntu true - false
     bool visited_maze;
-
     void draw_node(sf::RenderWindow* window);
-    /**
-     * Konstruktor klasy Node
-     *
-     * \param row liczba wierszy siatki
-     * \param col liczba kolum siatki
-     * \param width liczba pikseli na ekranie
-     * \param total_rows ustawia rozmiar siatki
-     */
 
     Node(unsigned int row, unsigned int col, float width, unsigned int total_rows);
 
-    /**
-     * Funkcja która która aktualizuje sąsiednie węzły grafu
-     *
-     * \param board jest przekazywany wektor wypełniony siąsiednimi węzłami
-     */
-
-    ///Funkcja aktualizuje wektór sąsiednich węzłów
     void update_neighbors(std::vector<Node*>* board);
 
-    ///Funkcja ustawiająca węzeł początkowy
     void set_start();
-
-    ///Funkcja ustawiająca węzeł docelowy
+    
     void set_target();
-
-    ///Funkcja ustawia węzeł przeszkodą
+    
     void set_obstacle();
 
-    ///Funkcja ustawia węzeł odwiedzonym
     void set_visited();
-
-    ///Funkcja ustawia węzeł otwrtym (możliwym do sprawdzenia)
+    
     void set_open();
-
-    ///Funkcja ustawia węzeł węzłem ścieżki
+    
     void set_path();
 
-    ///Funkcja usuwa wszystkie atrybuty
     void reset();
 
-    ///Funkcja sprawdza czy węzeł jest przeszkodą
     bool is_obstacle();
 
-    ///@return polożenie węzła
     sf::Vector2i get_coord();
 };
 
-#endif // NODE_H
+#endif 

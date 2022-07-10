@@ -5,37 +5,37 @@ DFS_::DFS_(std::vector<Node*>* tiles_, unsigned int total_rows_, Node* start, No
 
 DFS_::~DFS_() {}
 
-/// Funkcja która rozpoczyna działanie algorytmu
-void DFS_::run(Node* start, Node* end) {
-    start_node = start; // ustawienie początkowego i docelowego węzłów
-    end_node = end;
-    updateTileNeighbors(); // aktualizacja sąsiadów
 
-    std::unordered_map<Node*, bool> visited; // tworzenie kontenera par węzeł-stan
-    bool found_end = false; // na początku koniec nie jest znalieziony
-    DFS_recursion(visited, start_node, found_end); // funkcja rekurencyjna
+void DFS_::run(Node* start, Node* end) {
+    start_node = start; 
+    end_node = end;
+    updateTileNeighbors(); 
+
+    std::unordered_map<Node*, bool> visited; 
+    bool found_end = false; 
+    DFS_recursion(visited, start_node, found_end); 
     if (!found_end)
-        visited_nodes.clear(); // jeśli koniec nie znaleziony to usuwamy wszystkie odwiedzone węzły
+        visited_nodes.clear(); 
     else
-        reconstruct_path(end_node); //inaczej tworzymy ścieżkę
+        reconstruct_path(end_node); 
 }
 
 void DFS_::DFS_recursion(std::unordered_map<Node*, bool>& visited, Node* current, bool& found_end) {
-    visited[current] = true; //aktualny węzeł odwiedzony
-    if (current == end_node) // jeśli aktualny węzeł jest końcowym
-        found_end = true; // ustawiamy stan znalezionego końca na true
-    if (!found_end) // inaczej ustawiamy aktualny węzeł na koniec wektora odwiedzonych
+    visited[current] = true; 
+    if (current == end_node) 
+        found_end = true; 
+    if (!found_end) 
         visited_nodes.push_back(current);
-    // sprawdzamy każdego sąsiada dla aktualnego węzła
+    
     for (auto neighbor : current->neighbors) {
-        if (!visited[neighbor]) { //jeśli sąsiad nie jest odwiedony
-            previous_node[neighbor] = current; // aktualny węzeł jest poprzedim węzłem sąsiada
-            DFS_recursion(visited, neighbor, found_end); // rekurencja
+        if (!visited[neighbor]) { 
+            previous_node[neighbor] = current; 
+            DFS_recursion(visited, neighbor, found_end); 
         }
     }
 }
 
-///To samo co w Astar_
+
 void DFS_::reset_attributes() {
     previous_node.clear();
     path_nodes.clear();

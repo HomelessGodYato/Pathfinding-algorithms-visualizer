@@ -9,12 +9,12 @@ Node::Node(unsigned int row, unsigned int col, float width, unsigned int total_r
     this->x = row * (float)width;
     this->y = col * (float)width;
     this->color = sf::Color::White;
-    // na początku nie ma sąsiadów
+    
     this->total_rows = total_rows;
     tile_shape.setSize(sf::Vector2f(width, width));
     tile_shape.setPosition(x, y);
     tile_shape.setFillColor(color);
-    visited_maze = false; // generacja mapy jest wyłączona
+    visited_maze = false; 
 
 }
 

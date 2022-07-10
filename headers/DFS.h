@@ -2,11 +2,6 @@
 #define DFS_H
 #include "Search.h"
 
-/**
- * Klasa opisująca działanie algorytmu DFS
- * Opisana jest tak samo jak Astar_
- */
-
 class DFS_ : public Search_ {
 public:
 
@@ -19,16 +14,10 @@ public:
     virtual void reset_attributes() override;
 
 private:
-    /**
-     * Funkcja sprawdzająca czy jest znaleziony węzeł docelowy
-     *
-     * @param visited kontener par węzeł-stan
-     * @param current wskaźnik na aktualny węzeł
-     * @param found_end stan znalezionego końca
-     */
+    
     void DFS_recursion(std::unordered_map<Node*, bool>& visited, Node* current, bool& found_end);
 
 };
 
 
-#endif // DFS_H
+#endif 

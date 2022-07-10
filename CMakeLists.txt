@@ -43,7 +43,7 @@ add_executable(Pathfinder
         )
 
 set(SFML_STATIC_LIBRARIES TRUE)
-set(SFML_DIR D:/desktop/c++/Pathfinder/SFML-2.5.1/lib/cmake/SFML)
+set(SFML_DIR ./SFML-2.5.1/lib/cmake/SFML)
 find_package(SFML COMPONENTS system window graphics audio network REQUIRED)
 
 include_directories(D:/desktop/c++/Pathfinder/SFML-2.5.1/include)

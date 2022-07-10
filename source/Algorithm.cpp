@@ -6,15 +6,13 @@ Algorithm_::Algorithm_(std::vector<Node*>* tiles_, unsigned int total_rows_) :
 Algorithm_::~Algorithm_() {}
 
 void Algorithm_::updateTileNeighbors() {
-    //dla każdego węzła aktualizujemy sąsiadów
+    
     for (size_t i = 0; i < total_rows; ++i) {
         for (auto node : tiles[i])
-            node->update_neighbors(tiles);// funkcja z klasy Node
+            node->update_neighbors(tiles);
     }
 }
-///@return  wektor węzłów ścieżki
-std::vector<Node*> Algorithm_::getPathNodes() { return path_nodes; }
 
-///@return wektor odwiedzonych węzłów
+std::vector<Node*> Algorithm_::getPathNodes() { return path_nodes; }
 std::vector<Node*> Algorithm_::getVisitedNodes() { return visited_nodes; }
 

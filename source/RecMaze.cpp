@@ -5,21 +5,21 @@ RecursiveMaze::RecursiveMaze(std::vector<Node*>* tiles_, unsigned int total_rows
 
 RecursiveMaze::~RecursiveMaze() {}
 
-///Funkcja zaczynająca działanie algorytmu
+
 void RecursiveMaze::run(Node* start, Node* end) {
-    updateTileNeighbors(); // aktualizacja sąsiadów
-    std::unordered_map<Node*, bool> visited; // dodanie do kontenera pary węzeł-stan
-    Node* current = tiles[0][0]; // węzeł początkowy na pozycji 0 0
-    maze_recursion(current); // rekurencja z aktualnym węzłem
+    updateTileNeighbors(); 
+    std::unordered_map<Node*, bool> visited; 
+    Node* current = tiles[0][0]; 
+    maze_recursion(current); 
 }
-///Funkcja generowania labiryntu
+
 void RecursiveMaze::maze_recursion(Node* current) {
-    current->visited_maze = true; // aktualny węzeł jest odwiedzony
-    std::vector<Node*> randomized_neighbors = current->neighbors; // wektor losowo wybranych sąsiadów
-    std::random_shuffle(randomized_neighbors.begin(), randomized_neighbors.end()); // tasowanie
+    current->visited_maze = true; 
+    std::vector<Node*> randomized_neighbors = current->neighbors; 
+    std::random_shuffle(randomized_neighbors.begin(), randomized_neighbors.end()); 
 
     for (auto neighbor : randomized_neighbors) {
-        Node* next_neighbor = nullptr; // następny węzłem wskazuje na nic
+        Node* next_neighbor = nullptr; 
 
         if (neighbor->row > current->row) {
             if (!(tiles[neighbor->row + 1][neighbor->col])->visited_maze) {

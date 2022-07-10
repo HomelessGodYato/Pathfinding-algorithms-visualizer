@@ -3,12 +3,6 @@
 #include <unordered_map>
 #include "Algorithm.h"
 
-/**
- * Klasa opisująca działanie recurenczyjnego generowania labiryntu
- *
- * Jest opisanie podobnie jak klasa Astar_
- */
-
 class RecursiveMaze : public Algorithm_ {
 public:
 

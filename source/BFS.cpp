@@ -4,45 +4,45 @@ BFS_::BFS_(std::vector<Node*>* tiles_, unsigned int total_rows_, Node* start, No
         : Search_(tiles_, total_rows_, start, end) {}
 
 BFS_::~BFS_() {}
-/// funkcja zaczynająca działanie algorytmu
+
 
 void BFS_::run(Node* start, Node* end) {
-    start_node = start; // ustawienie początkowych węzłów
+    start_node = start; 
     end_node = end;
 
-    updateTileNeighbors(); // aktualizacja sąsiadów
+    updateTileNeighbors(); 
 
-    _queue.push(start_node); // dodanie do kolejki początkowy węzeł
-    visited[start_node] = true; // ustawianie stanu węzła na odwiedzony
+    _queue.push(start_node); 
+    visited[start_node] = true; 
 
-    bool found_end = false; // stan znalezionego końca, na początku = false
+    bool found_end = false; 
 
-    // sprawdzamy każdy węzeł w kolejce
+    
     while (!_queue.empty()) {
-        Node* current_node = _queue.front(); // aktualny węzel - wskaźnik na pierwszy węzeł w kolejce
+        Node* current_node = _queue.front(); 
         if (current_node == end_node)
             found_end = true;
 
         if (!found_end)
-            visited_nodes.push_back(current_node); // wstawiamy aktualny węzeł na koniec odwiedzonych węzłów
+            visited_nodes.push_back(current_node); 
 
-        _queue.pop(); // usuwamy pierwszy elemnet z kolejki
-        // sprawdzamy każdego sąsiada aktualnego węzła
+        _queue.pop(); 
+        
         for (auto neighbor : current_node->neighbors) {
-            if (!visited[neighbor]) { //jeśli nie jest odwiedzony to wstawimy do kolejki
+            if (!visited[neighbor]) { 
                 _queue.push(neighbor);
-                visited[neighbor] = true; // zmieniamy stan na odwiedzony
-                previous_node[neighbor] = current_node; // aktualny węzeł jest poprzednikiem jego sąsiada (następnego)
+                visited[neighbor] = true; 
+                previous_node[neighbor] = current_node; 
             }
         }
     }
 
-    if (!found_end) // jeśli nie znalieziono węzła docelowego to usuwamy wszystkie odwiedzone węzły
+    if (!found_end) 
         visited_nodes.clear();
     else
-        reconstruct_path(end_node); // w innym przypadku tworzymy ścieżkę
+        reconstruct_path(end_node); 
 }
-/// To samo co w Astar_
+
 void BFS_::reset_attributes() {
     previous_node.clear();
     std::queue<Node*> empty;

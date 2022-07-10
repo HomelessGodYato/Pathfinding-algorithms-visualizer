@@ -2,7 +2,7 @@
 #include <iostream>
 
 
-///Ustawianie kolorów liniii i prostokątów
+
 Graph::Graph(unsigned int rows, unsigned int width) {
     vertLine.setFillColor(sf::Color::Black);
     horLine.setFillColor(sf::Color::Black);
@@ -16,42 +16,42 @@ Graph::Graph(unsigned int rows, unsigned int width) {
 
 void Graph::construct_graph(unsigned int rows, unsigned int width) {
 
-    board = new std::vector<Node*>[rows]; // wektor wszyskich węzłów
-    total_rows = rows; // liczba wszystkich wierszy
-    board_width = width; // liczba wszystkich kolumn
-    tile_gap = (float)board_width / (float)total_rows; // odległóść dwoma liniami
+    board = new std::vector<Node*>[rows]; 
+    total_rows = rows; 
+    board_width = width; 
+    tile_gap = (float)board_width / (float)total_rows; 
 
     for (size_t i = 0; i < total_rows; ++i) {
         for (size_t k = 0; k < total_rows; ++k)
             board[i].push_back(new Node(i, k, tile_gap, total_rows));
     }
 
-    vertLine.setSize(sf::Vector2f(1, width));//definiowanie rozmiaru linii i prostokątów
+    vertLine.setSize(sf::Vector2f(1, width));
     horLine.setSize(sf::Vector2f(width, 1));
     green_tile.setSize(sf::Vector2f(tile_gap, tile_gap));
     red_tile.setSize(sf::Vector2f(tile_gap, tile_gap));
 
-    start_node = nullptr; // węzeł początkowy i docelowy wskazuje na nic
+    start_node = nullptr; 
     end_node = nullptr;
 
-    // ustawienie połozęnia początkowego węzła
+    
     board[(size_t)std::round(total_rows * Graph::ratio_row)][total_rows / 2]->set_start();
     start_node = board[(size_t)std::round(total_rows * Graph::ratio_row)][total_rows / 2];
 
-    // ustawienie połozęnia końcowego węzła
+    
     board[total_rows - (size_t)std::round(total_rows * Graph::ratio_row) - 1][total_rows / 2]->set_target();
     end_node = board[total_rows - (size_t)std::round(total_rows * Graph::ratio_row) - 1][total_rows / 2];
 
-    //Wypełnienie wektora poszczegółnymi obiektami algorytmów
+    
     search_algorithms.push_back(new Astar_(board, total_rows, start_node, end_node));
     search_algorithms.push_back(new Dijkstra_(board, total_rows, start_node, end_node));
     search_algorithms.push_back(new BFS_(board, total_rows, start_node, end_node));
     search_algorithms.push_back(new DFS_(board, total_rows, start_node, end_node));
 
-    //Dodanie do wektora generowania mapy algorytmu
+    
     terrain_algorithms.push_back(new RecursiveMaze(board, total_rows));
 
-    // ustawienie domyślnych algorytmów
+    
     current_search_algo = search_algorithms[Enum_Search::ASTAR];
     current_terrain_algo = terrain_algorithms[Maze_Algorithms::RM];
     current_maze_algo = Maze_Algorithms::RM;
@@ -60,36 +60,36 @@ void Graph::construct_graph(unsigned int rows, unsigned int width) {
 void Graph::clear_graph() {
     for (size_t i = 0; i < total_rows; ++i) {
         for (Node* node : board[i]) {
-            delete node; // usuwamy każdy węzeł w grafie
+            delete node; 
         }
-        board[i].clear(); // wyczyszamy wektór węzłów
+        board[i].clear(); 
     }
-    delete[] board; // usuwamy wektor węzłów
+    delete[] board; 
 
-    // usuwamy algorytmy z wektorów
+    
     for (auto algo : search_algorithms)
         delete algo;
 
     for (auto algo : terrain_algorithms)
         delete algo;
 
-    //wyczyszczamy wektory
+    
     search_algorithms.clear();
     terrain_algorithms.clear();
 }
 
 
 sf::Vector2u Graph::rowcol_pos_click(sf::Vector2i pos) {
-    unsigned int y = pos.x;//inicjalizacja położenia kursora
+    unsigned int y = pos.x;
     unsigned int x = pos.y;
-    unsigned int row = y / tile_gap; //wyznaczenie wiersza oraz koluny
+    unsigned int row = y / tile_gap; 
     unsigned int col = x / tile_gap;
-    return sf::Vector2u(row, col); // zwraca wiersz i kolumnę węzła
+    return sf::Vector2u(row, col); 
 }
 
 
 void Graph::draw_grid(sf::RenderWindow* window, const bool& enable) {
-    float row_pos_y; // pozycje kolum i wierszy
+    float row_pos_y; 
     float col_pos_x;
 
     if (enable) {

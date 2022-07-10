@@ -2,11 +2,7 @@
 #define DIJKSTRA_H
 #include "Search.h"
 
-/**
- * Klasa opisująca działanie algorytmu Dijkstry
- *
- * Klasa jest opisana tak samo jak Astar_
- */
+
 
 class Dijkstra_ : public Search_ {
 public:
@@ -20,12 +16,10 @@ public:
     virtual void reset_attributes() override;
 
 private:
-    /// implementowanie kolejki prioritetowej
+    
     std::set<std::pair<unsigned int, Node*>> priority_queue;
-
-    ///kontener par węzeł-stan
     std::unordered_map<Node*, unsigned int>  g_score;
 
 };
 
-#endif //DIJKSTRA_H
+#endif 

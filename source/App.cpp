@@ -21,7 +21,7 @@ App::App(unsigned int total_rows) : graph(total_rows, sf::VideoMode::getDesktopM
 
 
 void App::updateSFMLEvents() {
-    //zdarzenia które spowodują wyjście
+    
     while (window->pollEvent(sfEvent)) {
         ImGui::SFML::ProcessEvent(sfEvent);
         switch (sfEvent.type) {
@@ -34,8 +34,6 @@ void App::updateSFMLEvents() {
                     window->close();
                 }
                 break;
-
-
             case sf::Event::LostFocus:
                 app_in_focus = false;
                 break;
@@ -48,15 +46,14 @@ void App::updateSFMLEvents() {
     }
 }
 
-//Zdarzenia w grafie
+
 void App::update() {
     updateSFMLEvents();
 
     if (app_in_focus) {
-        if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) { // zdarzenie które spowoduje wizualizacje
+        if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) { 
             sf::Vector2u rowcol = graph.rowcol_pos_click(mousePos.getPosition(*window));
             if (finished_visualizing) {
-
                 for (size_t i = 0; i < graph.get_total_rows(); ++i) {
                     for (auto node: graph.get_board()[i]) {
                         if (node->color == sf::Color(PATH_COLOR) || node->color == sf::Color(VISITED_COLOR)
@@ -64,12 +61,11 @@ void App::update() {
                             node->reset();
                         }
                     }
-
                     finished_visualizing = false;
 
                 }
             }
-            //ustawienie węzłów
+
             else if (rowcol.x < graph.get_total_rows() && rowcol.y < graph.get_total_rows()) {
                 Node *clicked_node = graph.get_board()[rowcol.x][rowcol.y];
                 if (!(graph.STNodes().first) && clicked_node != graph.STNodes().second) {
@@ -82,11 +78,10 @@ void App::update() {
             }
 
         }
-        // zdarzenie które spowoduje usuwanie węzłów
+        
         else if (sf::Mouse::isButtonPressed(sf::Mouse::Right)) {
             sf::Vector2u rowcol = graph.rowcol_pos_click(mousePos.getPosition(*window));
             if (rowcol.x < graph.get_total_rows()) {
-
                 Node *clicked_node = graph.get_board()[rowcol.x][rowcol.y];
                 if (clicked_node == graph.STNodes().first && graph.STNodes().second != nullptr) {
                     clicked_node->reset();
@@ -104,7 +99,7 @@ void App::update() {
 
     }
 }
-// Funkcja GUI
+
 void App::imgui_update() {
     static bool AStar_checkbox = false;
     static bool Dijkstra_checkbox = false;
@@ -144,7 +139,7 @@ void App::imgui_update() {
             ImGui::Spacing();
             ImGui::Spacing();
 
-            // wybór odpowiedniego algorymu
+            
             if (AStar_checkbox) {
 
                 graph.assign_curr_search_algo(Enum_Search::ASTAR);
@@ -163,7 +158,7 @@ void App::imgui_update() {
 
             }
 
-            // jeśli wciśnięty przycisk to rozpoczyna sięwizualizacja
+            
             if (ImGui::Button("Solve", ImVec2(200, 100))) {
                 if (graph.STNodes().first != nullptr && graph.STNodes().second != nullptr) {
                     if (!visualize_visiting && !visualize_path) {
@@ -186,7 +181,7 @@ void App::imgui_update() {
                 ImGui::Spacing();
             }
 
-            //wybór algorytmu generowania
+            
             ImGui::Checkbox("Recursive Maze", &Recursive_check);
             if (Recursive_check) {
 
@@ -199,11 +194,10 @@ void App::imgui_update() {
             ImGui::Spacing();
             ImGui::Spacing();
 
-            // jeśli wciśnięto przycisk to zacznie się generacja labiryntu
+            
             if (ImGui::Button("Generate", ImVec2(200, 100))) {
                 if (graph.STNodes().first != nullptr && graph.STNodes().second != nullptr) {
                     if (!visualize_visiting && !visualize_path && !visualize_maze) {
-
                         for (size_t i = 0; i < graph.get_total_rows(); ++i) {
                             for (auto node: graph.get_board()[i]) {
                                 node->visited_maze = false;
@@ -215,7 +209,6 @@ void App::imgui_update() {
 
 
                         graph.g_curr_terr_algo()->run(graph.STNodes().first);
-
                         for (size_t i = 0; i < graph.get_total_rows(); ++i) {
                             for (size_t k = 0; k < graph.get_total_rows(); ++k) {
                                 if (!graph.get_board()[i][k]->visited_maze) {
@@ -226,7 +219,6 @@ void App::imgui_update() {
 
                         graph.STNodes().first->reset();
                         graph.STNodes().second->reset();
-
                         graph.assign_start(
                                 graph.get_board()[(size_t) std::round(graph.get_total_rows() * Graph::ratio_row) -
                                                   1][
@@ -236,7 +228,6 @@ void App::imgui_update() {
 
                         graph.STNodes().first->set_start();
                         graph.STNodes().second->set_target();
-
                         visualize_maze = true;
 
 
@@ -253,7 +244,7 @@ void App::imgui_update() {
             ImGui::Spacing();
         }
 
-        // jeśli wciśnięto przycisk to następuje wyczyczenie siatki
+        
         if (ImGui::Button("Clear", ImVec2(200, 100))) {
             if (graph.STNodes().first != nullptr && graph.STNodes().second != nullptr) {
                 if (!visualize_visiting && !visualize_path && !visualize_maze) {
@@ -268,7 +259,7 @@ void App::imgui_update() {
                 }
             }
         }
-        // przycisk który spowoduje wyjście z programu
+        
         ImGui::SameLine();
         if (ImGui::Button("Exit", ImVec2(200, 100))) {
             window->close();
@@ -277,22 +268,15 @@ void App::imgui_update() {
     }
     ImGui::End();
 }
-// funkcja rysująca wszytko na ekranie
+
 void App::render() {
 
-    // na początku wszystko jest wyczyszczne
+    
     window->clear(sf::Color::White);
-
-    //rysowanie klatek siatki
     graph.draw_tiles(window, visualize_visiting);
-
-    //jeśli stan wizualizacji jest true
-    // to rysujemy wszystkie węzły w zależności od ich kolorów
     if (visualize_visiting) {
-
         if (visited_count != visited_nodes.size())
             visited_count++;
-
         for (size_t i = 0; i < visited_count; ++i) {
             for (auto open_neighbor: visited_nodes[i]->neighbors) {
                 if (open_neighbor != graph.STNodes().first && open_neighbor != graph.STNodes().second)
@@ -303,8 +287,6 @@ void App::render() {
                     visited_nodes[i]->set_visited();
             }
             visited_nodes[i]->draw_node(window);
-
-
             if (i == visited_nodes.size() - 1) {
                 visualize_visiting = false;
                 visualize_path = true;
@@ -318,14 +300,9 @@ void App::render() {
         }
 
     }
-
-    //jeśli stan wizualizcji ścieżki jest true
-    // rysujemy ścieżkę
     if (visualize_path) {
-
         if (path_count != path_nodes.size())
             path_count++;
-
         for (size_t i = 0; i < path_count; ++i) {
             path_nodes[i]->set_path();
             path_nodes[i]->draw_node(window);
@@ -338,13 +315,11 @@ void App::render() {
         }
     }
 
-    // jeśli stan wizualicji labiryntu jest true
-    // rysujemy labirynt
+    
+    
     if (visualize_maze) {
-
         if (maze_count != graph.get_total_rows())
             maze_count++;
-
         for (size_t i = 0; i < maze_count; ++i) {
             for (size_t k = 0; k < maze_path[i].size(); ++k) {
                 if (maze_path[i][k]->color != sf::Color(OBSTACLE_COLOR))
@@ -356,19 +331,18 @@ void App::render() {
                 for (size_t i = 0; i < graph.get_total_rows(); ++i) {
                     maze_path[i].clear();
                 }
-
             }
         }
 
     }
-    //rysujemy siatkę
+    
     graph.draw_grid(window, grid_status);
     ImGui::SFML::Render(*window);
-    //wyświetlamy okno
+    
     window->display();
 }
 
-//uruchamiamy poszczególne elementy aplikacji
+
 void App::run() {
     ImGui::SFML::Init(*window);
     while (window->isOpen()) {
@@ -382,7 +356,7 @@ void App::run() {
     }
 }
 
-// usuwamy wszystkie elemetny
+
 App::~App() {
     graph.clear_graph();
     delete[] maze_path;
