@@ -10,8 +10,8 @@ Program writen in C++ with SFML graphics library and ImGui library
 5. Prims algorithm for maze generating
 
 # Screenshots
-!(https://github.com/HomelessGodYato/Pathfinding-algorithms-visualizer/blob/master/screenshots/1.png)
-!(https://github.com/HomelessGodYato/Pathfinding-algorithms-visualizer/blob/master/screenshots/2.png)
-!(https://github.com/HomelessGodYato/Pathfinding-algorithms-visualizer/blob/master/screenshots/3.png)
-!(https://github.com/HomelessGodYato/Pathfinding-algorithms-visualizer/blob/master/screenshots/4.png)
+![1](https://github.com/HomelessGodYato/Pathfinding-algorithms-visualizer/blob/master/screenshots/1.png)
+![2](https://github.com/HomelessGodYato/Pathfinding-algorithms-visualizer/blob/master/screenshots/2.png)
+![3](https://github.com/HomelessGodYato/Pathfinding-algorithms-visualizer/blob/master/screenshots/3.png)
+![4](https://github.com/HomelessGodYato/Pathfinding-algorithms-visualizer/blob/master/screenshots/4.png)
 
